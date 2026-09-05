@@ -84,9 +84,20 @@ body {
 .settings {
     background: #ddd;
     border: 1px solid #999;
-    visibility: collapse;
     font: normal normal normal 20px sans-serif;
-    padding: 5px;
+    display: none;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрує блок на екрані */
+
+    z-index: 1000;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.settings.show {
+    display: block;
 }
 
 .settings input {
@@ -100,11 +111,15 @@ body {
     background: none;
     padding: 0;
     cursor: pointer;
+    min-height: 0;
+    min-width: 0;
 }
 .go-button-container {
     width: 50%;
     display: flex;
-    justify-content: center
+    justify-content: center;
+    min-height: 0;
+    min-width: 0;
 }
 
 .status {
