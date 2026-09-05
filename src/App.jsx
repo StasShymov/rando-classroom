@@ -119,24 +119,28 @@ export default function ClassRoom() {
     };
 
     return <div className="app-container">
+        <div className="classroom" style={inlineStyle}>
+            {allDesks}
+        </div>
         <div style={{display: "flex"}}>
             <div style={{width: 50 + '%'}}>
                 <h2>Rand() for Classroom <button onClick={() => {
                     setSettingsVisible(!settingsVisible);
                 }}>Edit</button>
-                    <div className="settings" style={{visibility: settingsVisible ? 'visible' : 'collapse'}}>
-                        &nbsp;Rows: <input value={numberOfDeskRows} size={2}
-                                           onChange={(e) => {
-                                               setNumberOfDeskRows(Number(e.currentTarget.value))
-                                           }}/>
-                        &nbsp;Columns: <input value={numberOfDeskColumns} size={2}
-                                              onChange={(e) => {
-                                                  setNumberOfDeskColumns(Number(e.currentTarget.value))
-                                              }}/>
-                        &nbsp;Seats per desk: <input value={numberOfSeatsPerDesk} size={2}
-                                                     onChange={(e) => {
-                                                         setNumberOfSeatsPerDesk(Number(e.currentTarget.value))
-                                                     }}/>
+                    <div className={`settings ${settingsVisible ? 'show' : ''}`}>
+                        Rows:&nbsp;<input value={numberOfDeskRows} size={2}
+                                          onChange={(e) => {
+                                              setNumberOfDeskRows(Number(e.currentTarget.value))
+                                          }}/><br/>
+                        Columns:&nbsp;<input value={numberOfDeskColumns} size={2}
+                                             onChange={(e) => {
+                                                 setNumberOfDeskColumns(Number(e.currentTarget.value))
+                                             }}/><br/>
+                        Seats per desk:&nbsp;<input value={numberOfSeatsPerDesk} size={1}
+                                                    onChange={(e) => {
+                                                        setNumberOfSeatsPerDesk(Number(e.currentTarget.value))
+                                                    }}/><br/><br/>
+                        <button onClick={() => {setSettingsVisible(false)}} style={{width: 100+'%'}}>Ok</button>
                     </div>
                 </h2>
             </div>
@@ -153,10 +157,6 @@ export default function ClassRoom() {
                 </button>
             </div>
         </div>
-        <div className="classroom" style={inlineStyle}>
-            {allDesks}
-        </div>
-
     </div>
 
 }
