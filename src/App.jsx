@@ -65,7 +65,7 @@ export default function ClassRoom() {
             const index = (rowIndex * numberOfDeskColumns + colIndex) * numberOfSeatsPerDesk + i;
             const status = students[index];
             seats.push(
-                <img src={`/images/student-${status}.svg`}
+                <img src={`./images/student-${status}.svg`}
                      key={i}
                      alt={status}
                      style={{maxWidth: 100 / numberOfSeatsPerDesk + '%'}}
