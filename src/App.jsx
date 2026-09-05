@@ -123,8 +123,20 @@ export default function ClassRoom() {
             {allDesks}
         </div>
         <div style={{display: "flex"}}>
+            <div className="go-button-container">
+                <button className="go-button" onClick={goClicked}>
+                    <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="48" fill={numStudentsLeft > 0 ? '#4CAF50' : '#DCDF50'}/>
+                        <text x="50" y="50" textAnchor="middle" dominantBaseline="central" fill="white"
+                              fontFamily="Arial, sans-serif" fontSize={numStudentsLeft > 0 ? '36' : '24'}
+                              fontWeight="bold">
+                            {numStudentsLeft > 0 ? 'GO' : 'RESET'}
+                        </text>
+                    </svg>
+                </button>
+            </div>
             <div style={{width: 50 + '%'}}>
-                <h2>Rand() for Classroom <button onClick={() => {
+                <h2>FairPick for Classroom <button onClick={() => {
                     setSettingsVisible(!settingsVisible);
                 }}>Edit</button>
                     <div className={`settings ${settingsVisible ? 'show' : ''}`}>
@@ -143,18 +155,6 @@ export default function ClassRoom() {
                         <button onClick={() => {setSettingsVisible(false)}} style={{width: 100+'%'}}>Ok</button>
                     </div>
                 </h2>
-            </div>
-            <div className="go-button-container">
-                <button className="go-button" onClick={goClicked}>
-                    <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="48" fill={numStudentsLeft > 0 ? '#4CAF50' : '#DCDF50'}/>
-                        <text x="50" y="50" textAnchor="middle" dominantBaseline="central" fill="white"
-                              fontFamily="Arial, sans-serif" fontSize={numStudentsLeft > 0 ? '36' : '24'}
-                              fontWeight="bold">
-                            {numStudentsLeft > 0 ? 'GO' : 'RESET'}
-                        </text>
-                    </svg>
-                </button>
             </div>
         </div>
     </div>
