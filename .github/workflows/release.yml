@@ -1,0 +1,37 @@
+name: Build React Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies strictly
+        run: npm ci
+
+      - name: Lint Code
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build Production Assets
+        run: npm run build
+
+      - name: Upload Build Artifacts to GitHub
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build
+          path: dist/
+
