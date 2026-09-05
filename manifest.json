@@ -2,5 +2,5 @@
   "name": "Rando Classroom",
   "short_name": "Rando",
   "display": "standalone",
-  "start_url": "/"
+  "start_url": "/rando-classroom/"
 }
