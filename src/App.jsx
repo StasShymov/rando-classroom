@@ -7,8 +7,6 @@ const Status = Object.freeze({
     SELECTED: 'selected',
 });
 
-const LOCALSTORAGE_SETTINGS_KEY = 'rand0-classroom-settings:';
-
 export default function ClassRoom() {
     const [numberOfSeatsPerDesk, setNumberOfSeatsPerDesk] = useState(()=>{
         const numberOfSeatsPerDeskLS = localStorage.getItem('numberOfSeatsPerDesk');
@@ -40,14 +38,6 @@ export default function ClassRoom() {
         console.log('set numberOfDeskColumnsLS: ' + numberOfDeskColumns);
     }, [numberOfDeskColumns]);
 
-    // useEffect(() => {
-    //     const numberOfSeatsPerDeskLS = JSON.parse(localStorage.getItem());
-    //     if (numberOfSeatsPerDeskLS) {
-    //         console.log('got numberOfSeatsPerDeskLS: ' + numberOfSeatsPerDeskLS);
-    //         setNumberOfSeatsPerDesk(numberOfSeatsPerDeskLS)
-    //     }
-    // }, []);
-
     const [settingsVisible, setSettingsVisible] = useState(false);
     const numberOfStudents = numberOfDeskRows * numberOfDeskColumns * numberOfSeatsPerDesk;
     const [students, setStudents] = useState(Array(numberOfStudents).fill(Status.READY));
@@ -57,6 +47,9 @@ export default function ClassRoom() {
         setStudents(Array(numberOfStudents).fill(Status.READY))
     }
 
+    Object.values(Status).forEach((status, index) => {
+        new Image().src = `./images/student-${status}.svg`;
+    })
 
     function Desk({rowIndex, colIndex}) {
         const seats = [];
