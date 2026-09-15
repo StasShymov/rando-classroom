@@ -40,14 +40,34 @@ export default function ClassRoom() {
 
     const [settingsVisible, setSettingsVisible] = useState(false);
     const numberOfStudents = numberOfDeskRows * numberOfDeskColumns * numberOfSeatsPerDesk;
-    const [students, setStudents] = useState(Array(numberOfStudents).fill(Status.READY));
+    const [students, setStudents] = useState(() => {
+        const studentsLS = localStorage.getItem('students');
+        console.log('init studentsLS: ' + studentsLS);
+        let studentsParsed = null;
+        if (studentsLS) {
+            try {
+                studentsParsed = JSON.parse(studentsLS);
+            } catch {
+                studentsParsed = null;
+            }
+        }
+        if (Array.isArray(studentsParsed) && studentsParsed.length === numberOfStudents &&
+            studentsParsed.every((s) => Object.values(Status).includes(s))) {
+            return studentsParsed;
+        }
+        return Array(numberOfStudents).fill(Status.READY);
+    });
+    useEffect(() => {
+        localStorage.setItem('students', JSON.stringify(students));
+        console.log('set studentsLS, length: ' + students.length);
+    }, [students]);
     const numStudentsLeft = students.filter(element => element === Status.READY).length;
     if (numberOfStudents !== students.length) {
         console.log("Updated and reset to numberOfStudents: " + numberOfStudents);
         setStudents(Array(numberOfStudents).fill(Status.READY))
     }
 
-    Object.values(Status).forEach((status, index) => {
+    Object.values(Status).forEach((status) => {
         new Image().src = `./images/student-${status}.svg`;
     })
 

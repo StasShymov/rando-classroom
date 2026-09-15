@@ -14,6 +14,7 @@ npm run dev
 
 ## Build
 ```
+npm run lint
 npm run build
 ```
 
